@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WindPoleTracker</string>
+    <string name="title_activity_top_tracker">TopTrackerActivity</string>
+    <string name="title_activity_bottom_tracker">BottomTrackerActivity</string>
+</resources>
