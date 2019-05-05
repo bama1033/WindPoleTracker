@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_top_tracker.*
 import org.jsoup.Jsoup
+import java.text.SimpleDateFormat
+import java.util.*
 
 class TopTrackerActivity : AppCompatActivity() {
 
@@ -18,15 +20,15 @@ class TopTrackerActivity : AppCompatActivity() {
     private var counter = 0
     private var textidcounter = 0
 
-    private val trackerBotKey = "TrackerBot"
+    private val trackerTopKey = "TrackerTop"
 
 
-    private val bottomHistory = arrayListOf<String>(
+    private val topHistory = arrayListOf<String>(
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bottom_tracker)
+        setContentView(R.layout.activity_top_tracker)
         list = listOf(myID4, myID5)
         setSupportActionBar(toolbar)
 
@@ -36,8 +38,18 @@ class TopTrackerActivity : AppCompatActivity() {
             useSoup()
         }
         fab1.setOnClickListener { view ->
-            writeData(myID4)
-            writeData(myID5)
+            if (myID4.text.contains("Bitte neu laden") || myID5.text.contains("Bitte neu laden")) {
+                Toast.makeText(this, "Daten sind fehlerhaft bitte neu laden!", Toast.LENGTH_SHORT).show()
+            } else {
+                writeData(myID4)
+                writeData(myID5)
+            }
+        }
+        try {
+            useSoup()
+        }
+        catch (e: Exception) {
+            // handler
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -45,7 +57,7 @@ class TopTrackerActivity : AppCompatActivity() {
     private fun checkHistory() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         if (sharedPreferences != null) {
-            counter = sharedPreferences.getInt(trackerBotKey, 0)
+            counter = sharedPreferences.getInt(trackerTopKey, 0)
             if (counter.equals(0)) {
             } else {
                 fillList(counter)
@@ -57,16 +69,18 @@ class TopTrackerActivity : AppCompatActivity() {
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 //        var trackerBotValue: Int
-        var value: String
+        var value:String
+        val sdf = SimpleDateFormat("dd.MM.yyyy 'um' HH:mm:ss")
+        val currentDateandTime = sdf.format(Date())
         if (sharedPreferences != null) {
-            counter = sharedPreferences.getInt(trackerBotKey, 0)
+            counter = sharedPreferences.getInt(trackerTopKey, 0)
             with(sharedPreferences.edit()) {
                 counter += 1
                 val countervalue = counter
-                val key = "ValueBot$counter"
-                value = myID.text.toString()
+                val key= "ValueTop$counter"
+                value= currentDateandTime+", " + myID.text.toString()
                 putString(key, value)
-                putInt(trackerBotKey, countervalue)
+                putInt(trackerTopKey, countervalue)
                 apply()
             }
 //            trackerBotValue = sharedPreferences.getInt(trackerBotKey, 0)
@@ -83,12 +97,12 @@ class TopTrackerActivity : AppCompatActivity() {
         recview.apply {
             for (item: Int in value downTo 1) {
                 if (sharedPreferences != null) {
-                    val value = "ValueBot$item"
-                    bottomHistory.add(sharedPreferences.getString(value, "error"))
+                    val value= "ValueTop$item"
+                    topHistory.add(sharedPreferences.getString(value, "error"))
                 }
             }
             layoutManager = LinearLayoutManager(context)
-            adapter = Adapter(bottomHistory)
+            adapter = Adapter(topHistory)
         }
     }
 
@@ -100,7 +114,6 @@ class TopTrackerActivity : AppCompatActivity() {
                 links = doc
                     .select("tr")
                     .eachText()
-//                .attr("href")
             }
         } catch (e: Exception) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
@@ -112,10 +125,13 @@ class TopTrackerActivity : AppCompatActivity() {
         runOnUiThread {
             for (e in links) {
                 when (counter) {
-                    in 5..6 -> {
+                    in 4..5 -> {
                         var x = e.substring(5, e.length)
+                        if (x.toLowerCase().contains("windrichtung top")||x.toLowerCase().contains("windgeschw bot"))
+                        else{
+                            x=("Bitte neu laden")
+                        }
                         list[textidcounter].text = x
-//                        list[textidcounter].text = e
                         textidcounter++
                     }
                 }

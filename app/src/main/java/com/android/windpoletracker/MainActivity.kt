@@ -22,9 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         list = listOf(myID1, myID2, myID3, myID4, myID5)
-//        fab.setOnClickListener {
-//            useSoup()
-//        }
+        fab.setOnClickListener {
+            useSoup()
+        }
+
+        button.setOnClickListener {
+            val intent = Intent(this, GlobalActivity::class.java)
+            startActivity(intent)
+        }
 
         button2.setOnClickListener {
             val intent = Intent(this, TopTrackerActivity::class.java)

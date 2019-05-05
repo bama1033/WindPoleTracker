@@ -22,6 +22,15 @@
                     android:value="com.android.windpoletracker.MainActivity"/>
         </activity>
         <activity
+                android:name=".GlobalActivity"
+                android:label="@string/title_activity_global"
+                android:parentActivityName=".MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.android.windpoletracker.MainActivity"/>
+        </activity>
+        <activity
                 android:name=".TopTrackerActivity"
                 android:label="@string/title_activity_top_tracker"
                 android:parentActivityName=".MainActivity"

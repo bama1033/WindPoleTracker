@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:background="@drawable/test"
-        tools:context=".BottomTrackerActivity">
+        tools:context=".GlobalActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -28,7 +28,7 @@
 
 
     <TextView
-            android:text="BottomTracker"
+            android:text="GlobalTracker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
@@ -56,15 +56,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView2"
             app:layout_constraintBottom_toTopOf="@id/myID5"/>
-    <TextView
-            android:id="@+id/myID5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintBottom_toTopOf="@id/myID8"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/myID4"/>
 
     <TextView
             android:id="@+id/myID8"
@@ -74,7 +65,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="10dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/myID5"
+            app:layout_constraintTop_toBottomOf="@id/myID4"
             app:layout_constraintBottom_toTopOf="@id/recview"
             android:textSize="18sp"/>
 

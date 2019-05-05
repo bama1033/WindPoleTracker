@@ -2,34 +2,33 @@ package com.android.windpoletracker
 
 import android.annotation.SuppressLint
 import android.os.AsyncTask
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_bottom_tracker.*
+import kotlinx.android.synthetic.main.activity_global.*
 import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-class BottomTrackerActivity : AppCompatActivity() {
+class GlobalActivity : AppCompatActivity() {
     private lateinit var list: List<TextView>
     private lateinit var links: MutableList<String>
     private var counter = 0
     private var textidcounter = 0
 
-    private val trackerBotKey = "TrackerBot"
+    private val trackerGlobalKey = "TrackerGlobal"
 
 
-    private val bottomHistory = arrayListOf<String>(
+    private val globalHistory = arrayListOf<String>(
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bottom_tracker)
-        list = listOf(myID4, myID5)
+        setContentView(R.layout.activity_global)
+        list = listOf(myID4)
         setSupportActionBar(toolbar)
 
         checkHistory()
@@ -38,11 +37,10 @@ class BottomTrackerActivity : AppCompatActivity() {
             useSoup()
         }
         fab1.setOnClickListener { view ->
-            if (myID4.text.contains("Bitte neu laden") || myID5.text.contains("Bitte neu laden")) {
+            if (myID4.text.contains("Bitte neu laden")) {
                 Toast.makeText(this, "Daten sind fehlerhaft bitte neu laden!", Toast.LENGTH_SHORT).show()
             } else {
                 writeData(myID4)
-                writeData(myID5)
             }
         }
         try {
@@ -57,7 +55,7 @@ class BottomTrackerActivity : AppCompatActivity() {
     private fun checkHistory() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         if (sharedPreferences != null) {
-            counter = sharedPreferences.getInt(trackerBotKey, 0)
+            counter = sharedPreferences.getInt(trackerGlobalKey, 0)
             if (counter.equals(0)) {
             } else {
                 fillList(counter)
@@ -73,14 +71,14 @@ class BottomTrackerActivity : AppCompatActivity() {
         val sdf = SimpleDateFormat("dd.MM.yyyy 'um' HH:mm:ss")
         val currentDateandTime = sdf.format(Date())
         if (sharedPreferences != null) {
-            counter = sharedPreferences.getInt(trackerBotKey, 0)
+            counter = sharedPreferences.getInt(trackerGlobalKey, 0)
             with(sharedPreferences.edit()) {
                 counter += 1
                 val countervalue = counter
-                val key = "ValueBot$counter"
+                val key = "ValueGlobal$counter"
                 value = currentDateandTime + ", " + myID.text.toString()
                 putString(key, value)
-                putInt(trackerBotKey, countervalue)
+                putInt(trackerGlobalKey, countervalue)
                 apply()
             }
 //            trackerBotValue = sharedPreferences.getInt(trackerBotKey, 0)
@@ -97,12 +95,12 @@ class BottomTrackerActivity : AppCompatActivity() {
         recview.apply {
             for (item: Int in value downTo 1) {
                 if (sharedPreferences != null) {
-                    val value = "ValueBot$item"
-                    bottomHistory.add(sharedPreferences.getString(value, "error"))
+                    val value = "ValueGlobal$item"
+                    globalHistory.add(sharedPreferences.getString(value, "error"))
                 }
             }
             layoutManager = LinearLayoutManager(context)
-            adapter = Adapter(bottomHistory)
+            adapter = Adapter(globalHistory)
         }
     }
 
@@ -126,9 +124,9 @@ class BottomTrackerActivity : AppCompatActivity() {
         runOnUiThread {
             for (e in links) {
                 when (counter) {
-                    in 7..8 -> {
+                     6 -> {
                         var x = e.substring(5, e.length)
-                        if (x.toLowerCase().contains("windrichtung bot") || x.toLowerCase().contains("windgeschw bot"))
+                        if (x.toLowerCase().contains("global"))
                         else {
                             x = ("Bitte neu laden")
                         }
