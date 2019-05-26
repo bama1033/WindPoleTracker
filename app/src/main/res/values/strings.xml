@@ -3,4 +3,6 @@
     <string name="title_activity_top_tracker">TopTrackerActivity</string>
     <string name="title_activity_bottom_tracker">BottomTrackerActivity</string>
     <string name="title_activity_global">GlobalActivity</string>
+    <string name="dash">-</string>
+    <string name="bersicht">Übersicht</string>
 </resources>

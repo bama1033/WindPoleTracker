@@ -8,7 +8,6 @@
         android:background="@drawable/test"
         tools:context=".MainActivity">
 
-
     <TextView
             android:text="Windrad-App"
             android:layout_width="wrap_content"

@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BottomTrackerActivity::class.java)
             startActivity(intent)
         }
-
-
-
     }
 
     fun useSoup() {
