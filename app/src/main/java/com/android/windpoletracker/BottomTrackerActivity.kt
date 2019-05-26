@@ -78,7 +78,7 @@ class BottomTrackerActivity : AppCompatActivity() {
                 counter += 1
                 val countervalue = counter
                 val key = "ValueBot$counter"
-                value = currentDateandTime + ", " + myID.text.toString()
+                value = currentDateandTime + ",\n" + myID.text.toString()
                 putString(key, value)
                 putInt(trackerBotKey, countervalue)
                 apply()

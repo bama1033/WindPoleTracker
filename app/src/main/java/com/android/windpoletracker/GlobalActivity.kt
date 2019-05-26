@@ -76,7 +76,7 @@ class GlobalActivity : AppCompatActivity() {
                 counter += 1
                 val countervalue = counter
                 val key = "ValueGlobal$counter"
-                value = currentDateandTime + ", " + myID.text.toString()
+                value = currentDateandTime + ",\n" + myID.text.toString()
                 putString(key, value)
                 putInt(trackerGlobalKey, countervalue)
                 apply()
