@@ -25,12 +25,10 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             useSoup()
         }
-
         button.setOnClickListener {
             val intent = Intent(this, GlobalActivity::class.java)
             startActivity(intent)
         }
-
         button2.setOnClickListener {
             val intent = Intent(this, TopTrackerActivity::class.java)
             startActivity(intent)

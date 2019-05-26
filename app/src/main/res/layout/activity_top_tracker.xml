@@ -27,8 +27,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-            android:text="Übersicht"
-            android:layout_below="@id/appbar"
+            android:text="@string/bersicht"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
