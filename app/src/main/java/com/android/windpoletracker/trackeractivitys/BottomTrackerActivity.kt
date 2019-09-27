@@ -93,7 +93,7 @@ class BottomTrackerActivity : AppCompatActivity() {
                 val keyRegValue = "TrackerBot$counter"
                 val keyDate = "DateBot$counter"
 
-                value = currentDateAndTime + ",\n" + myID.text.toString()
+                value = " " +currentDateAndTime + ",\n" + myID.text.toString()
                 putString(key, value)
                 putString(keyRegValue, counterRegValue)
                 putString(keyDate, currentDateAndTime)

@@ -93,7 +93,7 @@ class TopTrackerActivity : AppCompatActivity() {
                 val keyRegValue = "TrackerTop$counter"
                 val keyDate = "DateTop$counter"
 
-                value = currentDateAndTime + ",\n" + myID.text.toString()
+                value = " " +currentDateAndTime + ",\n" + myID.text.toString()
                 putString(key, value)
                 putString(keyRegValue, counterRegValue)
                 putString(keyDate, currentDateAndTime)

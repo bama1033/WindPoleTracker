@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.android.windpoletracker">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.android.windpoletracker">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
             android:allowBackup="true"
@@ -11,48 +12,70 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            android:usesCleartextTraffic="true">
-        <activity android:name=".graphactivitys.TopGraphActivity">
-        </activity>
-        <activity android:name=".graphactivitys.BottomGraphActivity">
-        </activity>
-        <activity android:name=".graphactivitys.GlobalGraphActivity">
-
-        </activity>
+            android:usesCleartextTraffic="true"
+            tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".trackeractivitys.BottomTrackerActivity"
-                android:label="@string/title_activity_bottom_tracker"
-                android:parentActivityName=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:name=".graphactivitys.TopGraphActivity"
+                android:parentActivityName=".trackeractivitys.TopTrackerActivity"
+                android:theme="@style/AppTheme.NoActionBar"
+                tools:ignore="ExtraText">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.android.windpoletracker.MainActivity"/>
+                    android:value="com.android.windpoletracker.trackeractivitys.TopTrackerActivity" />
         </activity>
         <activity
-                android:name=".trackeractivitys.GlobalTrackerActivity"
-                android:label="@string/title_activity_global"
-                android:parentActivityName=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:name=".graphactivitys.BottomGraphActivity"
+                android:parentActivityName=".trackeractivitys.BottomTrackerActivity"
+                android:theme="@style/AppTheme.NoActionBar"
+                tools:ignore="ExtraText">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.android.windpoletracker.MainActivity"/>
+                    android:value="com.android.windpoletracker.trackeractivitys.BottomTrackerActivity" />
         </activity>
         <activity
-                android:name=".trackeractivitys.TopTrackerActivity"
-                android:label="@string/title_activity_top_tracker"
-                android:parentActivityName=".MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:name=".graphactivitys.GlobalGraphActivity"
+                android:parentActivityName=".trackeractivitys.GlobalTrackerActivity"
+                android:theme="@style/AppTheme.NoActionBar"
+                tools:ignore="ExtraText">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.android.windpoletracker.MainActivity"/>
-        </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                    android:value="com.android.windpoletracker.trackeractivitys.GlobalTrackerActivity" />
+    </activity>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-    </application>
+    <activity
+            android:name=".trackeractivitys.BottomTrackerActivity"
+            android:label="@string/title_activity_bottom_tracker"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.windpoletracker.MainActivity" />
+    </activity>
+    <activity
+            android:name=".trackeractivitys.GlobalTrackerActivity"
+            android:label="@string/title_activity_global"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.windpoletracker.MainActivity" />
+    </activity>
+    <activity
+            android:name=".trackeractivitys.TopTrackerActivity"
+            android:label="@string/title_activity_top_tracker"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.windpoletracker.MainActivity" />
+    </activity>
+    <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-</manifest>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+</application>
+
+        </manifest>

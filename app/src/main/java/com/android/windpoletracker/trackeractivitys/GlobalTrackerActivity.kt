@@ -68,8 +68,7 @@ class GlobalTrackerActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         if (sharedPreferences != null) {
             counter = sharedPreferences.getInt(trackerGlobalKey, 0)
-            if (counter == 0) {
-            } else {
+            if (counter != 0) {
                 fillList(counter)
             }
         }
@@ -91,7 +90,7 @@ class GlobalTrackerActivity : AppCompatActivity() {
                 val keyRegValue = "TrackerGlobal$counter"
                 val keyDate = "DateGlobal$counter"
 
-                value = currentDateAndTime + ",\n" + myID.text.toString()
+                value = " " + currentDateAndTime + ",\n" + myID.text.toString()
                 putString(key, value)
                 putString(keyRegValue, counterRegValue)
                 putString(keyDate, currentDateAndTime)

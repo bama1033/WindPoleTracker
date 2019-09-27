@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Globaleinstrahlung:"
+            android:text="Globalstrahlung:"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myID2"/>
@@ -84,7 +84,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"/>
     <Button
-            android:text="Globaleinstrahlung:"
+            android:text="Globalstrahlung:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
