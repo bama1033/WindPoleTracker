@@ -5,4 +5,7 @@
     <string name="title_activity_global">GlobalActivity</string>
     <string name="dash">-</string>
     <string name="bersicht">Übersicht</string>
+    <string name="bottomgraph">Bottomgraph</string>
+    <string name="globalgraph">Globalgraph</string>
+    <string name="topgraph">Topgraph</string>
 </resources>

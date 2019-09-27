@@ -12,6 +12,7 @@ private lateinit var links: MutableList<String>
 private lateinit var list: List<TextView>
 private var counter = 0
 private var textidcounter = 0
+
 fun useSoup(c: Context) {
     try {
         doAsync {

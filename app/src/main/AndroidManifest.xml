@@ -12,8 +12,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".graphactivitys.TopGraphActivity">
+        </activity>
+        <activity android:name=".graphactivitys.BottomGraphActivity">
+        </activity>
+        <activity android:name=".graphactivitys.GlobalGraphActivity">
+
+        </activity>
         <activity
-                android:name=".BottomTrackerActivity"
+                android:name=".trackeractivitys.BottomTrackerActivity"
                 android:label="@string/title_activity_bottom_tracker"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -22,7 +29,7 @@
                     android:value="com.android.windpoletracker.MainActivity"/>
         </activity>
         <activity
-                android:name=".GlobalActivity"
+                android:name=".trackeractivitys.GlobalTrackerActivity"
                 android:label="@string/title_activity_global"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -31,7 +38,7 @@
                     android:value="com.android.windpoletracker.MainActivity"/>
         </activity>
         <activity
-                android:name=".TopTrackerActivity"
+                android:name=".trackeractivitys.TopTrackerActivity"
                 android:label="@string/title_activity_top_tracker"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">

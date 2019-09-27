@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:background="@drawable/test"
-        tools:context=".TopTrackerActivity">
+        tools:context=".trackeractivitys.TopTrackerActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -97,4 +97,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@android:drawable/ic_menu_edit"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_gallery"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.windpoletracker.trackeractivitys.BottomTrackerActivity
+import com.android.windpoletracker.trackeractivitys.GlobalTrackerActivity
+import com.android.windpoletracker.trackeractivitys.TopTrackerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jsoup.Jsoup
 import java.util.regex.Pattern
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             useSoup()
         }
         button.setOnClickListener {
-            val intent = Intent(this, GlobalActivity::class.java)
+            val intent = Intent(this, GlobalTrackerActivity::class.java)
             startActivity(intent)
         }
         button2.setOnClickListener {
@@ -37,6 +40,20 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BottomTrackerActivity::class.java)
             startActivity(intent)
         }
+//        val pie = AnyChart.line()
+//        pie.background()
+//        val data: ArrayList<ValueDataEntry> = ArrayList()
+//        data.add(ValueDataEntry("01.07", 10000))
+//        data.add(ValueDataEntry("02.07", 12000))
+//        data.add(ValueDataEntry("03.07", 18000))
+//
+//        pie.dataArea().background().enabled(true)
+//        pie.dataArea().background().fill("#D3D3D3 0.2")
+//
+//
+//        pie.data(data as List<DataEntry>?)
+//        val anyChartView = any_chart_view as AnyChartView
+//        anyChartView.setChart(pie)
     }
 
     fun useSoup() {
@@ -46,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                 links = doc
                     .select("tr")
                     .eachText()
-//                .attr("href")
             }
         } catch (e: Exception) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()

@@ -1,34 +1,43 @@
-package com.android.windpoletracker
+package com.android.windpoletracker.trackeractivitys
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_global.*
+import com.android.windpoletracker.Adapter
+import com.android.windpoletracker.R
+import com.android.windpoletracker.graphactivitys.TopGraphActivity
+import kotlinx.android.synthetic.main.activity_top_tracker.*
 import org.jsoup.Jsoup
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
-class GlobalActivity : AppCompatActivity() {
+class TopTrackerActivity : AppCompatActivity() {
+
     private lateinit var list: List<TextView>
     private lateinit var links: MutableList<String>
     private var counter = 0
     private var textidcounter = 0
+    private var callSuccess = false
+    private val trackerTopKey = "TrackerTop"
+    private val topValueKey = "ValueTop"
+    private val topDateKey = "DateTop"
+    private var dirtyWorkaround = ""
 
-    private val trackerGlobalKey = "TrackerGlobal"
 
-
-    private val globalHistory = arrayListOf<String>(
+    private val topHistory = arrayListOf<String>(
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_global)
-        list = listOf(myID4)
+        setContentView(R.layout.activity_top_tracker)
+        list = listOf(myID4, myID5)
         setSupportActionBar(toolbar)
 
         checkHistory()
@@ -37,16 +46,21 @@ class GlobalActivity : AppCompatActivity() {
             useSoup()
         }
         fab1.setOnClickListener { view ->
-            if (myID4.text.contains("Bitte neu laden")) {
-                Toast.makeText(this, "Daten sind fehlerhaft bitte neu laden!", Toast.LENGTH_SHORT).show()
+            if (myID4.text.contains("Bitte neu laden") || myID5.text.contains("Bitte neu laden")) {
+                Toast.makeText(this, "Daten sind fehlerhaft bitte neu laden!", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 writeData(myID4)
+                writeData(myID5)
             }
+        }
+        fab3.setOnClickListener { view ->
+            val intent = Intent(this, TopGraphActivity::class.java)
+            startActivity(intent)
         }
         try {
             useSoup()
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             // handler
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -55,8 +69,8 @@ class GlobalActivity : AppCompatActivity() {
     private fun checkHistory() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         if (sharedPreferences != null) {
-            counter = sharedPreferences.getInt(trackerGlobalKey, 0)
-            if (counter.equals(0)) {
+            counter = sharedPreferences.getInt(trackerTopKey, 0)
+            if (counter == 0) {
             } else {
                 fillList(counter)
             }
@@ -66,25 +80,31 @@ class GlobalActivity : AppCompatActivity() {
     private fun writeData(myID: TextView) {
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-//        var trackerBotValue: Int
         var value: String
         val sdf = SimpleDateFormat("dd.MM.yyyy 'um' HH:mm:ss")
-        val currentDateandTime = sdf.format(Date())
+        val currentDateAndTime = sdf.format(Date())
         if (sharedPreferences != null) {
-            counter = sharedPreferences.getInt(trackerGlobalKey, 0)
+            counter = sharedPreferences.getInt(trackerTopKey, 0)
             with(sharedPreferences.edit()) {
                 counter += 1
                 val countervalue = counter
-                val key = "ValueGlobal$counter"
-                value = currentDateandTime + ",\n" + myID.text.toString()
+                val key = "ValueTop$counter"
+                val counterRegValue = dirtyWorkaround
+                val keyRegValue = "TrackerTop$counter"
+                val keyDate = "DateTop$counter"
+
+                value = currentDateAndTime + ",\n" + myID.text.toString()
                 putString(key, value)
-                putInt(trackerGlobalKey, countervalue)
+                putString(keyRegValue, counterRegValue)
+                putString(keyDate, currentDateAndTime)
+                putInt(trackerTopKey, countervalue)
+                putInt(topValueKey, countervalue)
+                putInt(topDateKey, countervalue)
+                putInt(trackerTopKey, countervalue)
                 apply()
             }
-//            trackerBotValue = sharedPreferences.getInt(trackerBotKey, 0)
-            if (counter.equals(0)) {
+            if (counter == 0) {
             } else {
-//                fillList(trackerBotValue)
                 Toast.makeText(this, "$value has been added", Toast.LENGTH_SHORT).show()
             }
         }
@@ -95,12 +115,12 @@ class GlobalActivity : AppCompatActivity() {
         recview.apply {
             for (item: Int in value downTo 1) {
                 if (sharedPreferences != null) {
-                    val value = "ValueGlobal$item"
-                    globalHistory.add(sharedPreferences.getString(value, "error"))
+                    val valueItem = "ValueTop$item"
+                    topHistory.add(sharedPreferences.getString(valueItem, "error"))
                 }
             }
             layoutManager = LinearLayoutManager(context)
-            adapter = Adapter(globalHistory)
+            adapter = Adapter(topHistory)
         }
     }
 
@@ -112,7 +132,6 @@ class GlobalActivity : AppCompatActivity() {
                 links = doc
                     .select("tr")
                     .eachText()
-//                .attr("href")
             }
         } catch (e: Exception) {
             Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
@@ -124,10 +143,19 @@ class GlobalActivity : AppCompatActivity() {
         runOnUiThread {
             for (e in links) {
                 when (counter) {
-                     6 -> {
+                    in 4..5 -> {
                         var x = e.substring(5, e.length)
-                        if (x.toLowerCase().contains("global"))
-                        else {
+                        if (x.toLowerCase().contains("windrichtung top") || x.toLowerCase().contains(
+                                "windgeschw bot"
+                            )
+                        ) {
+                            val p = Pattern.compile("[0-9]{4}|[0-9]{3}|[0-9]{2}|[0-9]{1}")
+                            val m = p.matcher(x)
+                            if (m.find()) {
+                                val z = m.group()
+                                dirtyWorkaround = z
+                            }
+                        } else {
                             x = ("Bitte neu laden")
                         }
                         list[textidcounter].text = x
@@ -149,14 +177,22 @@ class GlobalActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: Void?): Void? {
-            handler()
+            try {
+                handler()
+                callSuccess = true
+            } catch (e: Exception) {
+                callSuccess
+            }
             return null
         }
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
-            taskDone()
+            if (callSuccess) {
+                taskDone()
+            }
         }
     }
 }
+
 
