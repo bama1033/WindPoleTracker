@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">WindPoleTracker</string>
-    <string name="title_activity_top_tracker">TopTrackerActivity</string>
-    <string name="title_activity_bottom_tracker">BottomTrackerActivity</string>
-    <string name="title_activity_global">GlobalActivity</string>
+    <string name="title_activity_top_tracker">Wind Top</string>
+    <string name="title_activity_bottom_tracker">Wind Bottom</string>
+    <string name="title_activity_global">Globalstrahlung</string>
     <string name="dash">-</string>
     <string name="bersicht">Übersicht</string>
     <string name="bottomgraph">Bottomgraph</string>

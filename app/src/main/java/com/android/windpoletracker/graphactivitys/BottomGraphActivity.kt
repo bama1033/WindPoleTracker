@@ -75,7 +75,7 @@ class BottomGraphActivity : AppCompatActivity() {
 
         pie.yAxis(0).enabled()
         pie.yAxis(0).orientation("left")
-        pie.yAxis(0).title("Units")
+        pie.yAxis(0).title("m/s")
 
 
         pie.data(graphData as List<DataEntry>?)

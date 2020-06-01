@@ -76,23 +76,10 @@ class TopGraphActivity : AppCompatActivity() {
 
         line.yAxis(0).enabled()
         line.yAxis(0).orientation("left")
-        line.yAxis(0).title("Units")
+        line.yAxis(0).title("m/s")
 
         line.data(graphData as List<DataEntry>?)
         val anyChartView = any_chart_view as AnyChartView
         anyChartView.setChart(line)
     }
-    //        data.add(CustomDataEntry("01.07", 10000,11000))
-//        data.add(CustomDataEntry("02.07", 12000,11000))
-//        data.add(CustomDataEntry("03.07", 18000,13000))
-//    private inner class CustomDataEntry internal constructor(
-//        x: String,
-//        value: Number,
-//        value2: Number
-//    ) : ValueDataEntry(x, value) {
-//        init {
-//            setValue("value2", value)
-//            setValue("value3", value2)
-//        }
-//    }
 }

@@ -74,7 +74,7 @@ class GlobalGraphActivity : AppCompatActivity() {
 
         line.yAxis(0).enabled()
         line.yAxis(0).orientation("left")
-        line.yAxis(0).title("Units")
+        line.yAxis(0).title("W/m²")
 
         line.data(graphData as List<DataEntry>?)
         val anyChartView = any_chart_view as AnyChartView

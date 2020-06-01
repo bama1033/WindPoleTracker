@@ -110,7 +110,7 @@ class TopTrackerActivity : AppCompatActivity() {
         }
     }
 
-    fun fillList(value: Int) {
+    private fun fillList(value: Int) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         recview.apply {
             for (item: Int in value downTo 1) {
@@ -146,7 +146,7 @@ class TopTrackerActivity : AppCompatActivity() {
                     in 4..5 -> {
                         var x = e.substring(5, e.length)
                         if (x.toLowerCase().contains("windrichtung top") || x.toLowerCase().contains(
-                                "windgeschw bot"
+                                "windgeschw top"
                             )
                         ) {
                             val p = Pattern.compile("[0-9]{4}|[0-9]{3}|[0-9]{2}|[0-9]{1}")
