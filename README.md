@@ -7,6 +7,6 @@ WindPole-Tracker with JSoup (only working with VPN of dedicated HS)
 
 -Display them in a linechart from AnyChart dependency
 
-![Screenshot](mm_pic.png)
+![Screenshot](mm_pic.jpeg)
 
-![Screenshot](entry_pic.png)
+![Screenshot](entry_pic.jpeg)
